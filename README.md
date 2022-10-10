@@ -1,2 +1,2 @@
 # Terrux
-A simple prompt written in Rust
+Emulate a prompt written in Rust
