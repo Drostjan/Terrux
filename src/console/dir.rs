@@ -37,13 +37,11 @@ impl Dir {
         
     }
 
-    pub fn in_dir(&mut self, name: String) -> String{
-        let mut res = String::new();
+    pub fn in_dir(&mut self, name: &str) -> bool{
+        let mut res = false;
         for dir in &self.dirs {
             if dir.name == name  {
-                res = name.to_owned();
-            }else{
-                res = "".to_owned();
+                res = true;
             }
             
         }
