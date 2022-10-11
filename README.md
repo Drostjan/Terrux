@@ -1,2 +1,4 @@
 # Terrux
-Emulate a prompt written in Rust
+Prompt emulator with Rust
+
+Soon could be a real prompt
