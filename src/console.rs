@@ -1,4 +1,5 @@
 #![allow(unused_must_use)]
+#![allow(unused_assignments)]
 
 mod dir;
 mod color;
@@ -65,6 +66,14 @@ impl Cmd {
                         println!("Terrux: bad lenght command ")
                     }
                 },
+                "chdir" => {
+                    if self.path == "/"{
+                        param = split[1].replace("/", "");
+                        self.root.dir_add(&param);
+                    }else{
+
+                    }
+                }
                 _  => println!("Terrux: command not found '{}'",&comm),
             }
 
