@@ -23,6 +23,10 @@ impl Dir {
         }
     }
 
+    pub fn get_name(&self) -> String {
+        return self.name.to_owned();
+    }
+
     pub fn dir_add(&mut self, name: &str) {
         self.dirs.push(Dir::new(name));
     }
@@ -49,6 +53,16 @@ impl Dir {
         res
     }
 
+    pub fn element(&self){
+        let mut res = "|_";
+        let mut t = String::new();
+        for d in &self.dirs{
+            t = res.to_string()+"/"+d.get_name().as_str();
+            println!("{}",t);
+        }
+            
+    }
+    
     pub fn file_add(&mut self, name: String) {
         self.files.push(File::new(name));
     }

@@ -68,12 +68,13 @@ impl Cmd {
                 },
                 "chdir" => {
                     if self.path == "/"{
-                        param = split[1].replace("/", "");
+                        param = split[1].replace("/", "").replace("\n", "");
                         self.root.dir_add(&param);
                     }else{
-
+                        println!("Terrux: '{}' unknown path", param);
                     }
-                }
+                },
+                "tree" => self.tree(),
                 _  => println!("Terrux: command not found '{}'",&comm),
             }
 
@@ -134,6 +135,12 @@ impl Cmd {
         }
     
         self.path = p;
+    }
+
+    pub fn tree(&self){
+        let name = self.root.get_name();
+        println!("{}",name);
+        self.root.element();
     }
 
 }
