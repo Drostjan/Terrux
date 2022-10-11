@@ -74,7 +74,32 @@ impl Cmd {
                         println!("Terrux: '{}' unknown path", param);
                     }
                 },
+                "rmdir" => {
+                    if self.path == "/"{
+                        if split[1].contains("/"){
+                            param = split[1].replace("/", "").replace("\n", "");
+                            self.root.dir_remove(param)
+                        }else{
+                            param = split[1].replace("\n", "");
+                            self.root.dir_remove(param);
+                        }
+                    }else{
+                        println!("Terrux: '{}' unknown path", param);
+                    }
+                },
+                "chmod" => {
+
+                },
+                "atribs" => {
+                    param = split[1].split("\n").collect();
+                    println!("{:?}",self.root.get_atributes(param));
+                },
+                "touch" => {
+                    param = split[1].replace("\n", "");
+                    self.root.file_add(param);
+                }
                 "tree" => self.tree(),
+                "clear" => self.clear_screen(),
                 _  => println!("Terrux: command not found '{}'",&comm),
             }
 
@@ -88,15 +113,19 @@ impl Cmd {
         println!("q|exit        - Exit of the prompt ");
         println!("pwd           - Return the path where you're located      ");
         println!("cd            - Change the directory where you're located ");
-        println!("chdir         - Create a new directory  ");
-        println!("rmdir         - Delete a directory       ");
-        println!("chmod         - Change atributes    ");
-        println!("clear         - Clear the screen     ");
+        println!("chdir         - Create a new directory                    ");
+        println!("rmdir         - Delete a directory                        ");
+        println!("chmod         - Change atributes                          ");
+        println!("atribs        - View all atributes                        ");
+        println!("touch         - Create a new file                         ");
+        println!("rm            - Delete a file                             ");
+        println!("tree          - Tree view                                 ");
+        println!("clear         - Clear the screen                          ");
         println!("");
     }
     
     pub fn clear_screen(&self) {
-        print!("{}[2J", 27 as char);
+        print!("{esc}[2J{esc}[1;1H", esc = 27 as char);
     }
     
     pub fn cd(&mut self, dest: &str) {

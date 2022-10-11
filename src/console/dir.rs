@@ -17,7 +17,7 @@ impl Dir {
     pub fn new(name: &str) -> Dir {
         Dir { 
             name: name.to_owned(), 
-            atributes: Vec::new(),
+            atributes: vec!["D".to_string(),"X".to_string(),"W".to_string(),"R".to_string()],
             dirs: Vec::new(),
             files: Vec::new(),
         }
@@ -25,6 +25,15 @@ impl Dir {
 
     pub fn get_name(&self) -> String {
         return self.name.to_owned();
+    }
+
+    pub fn get_atributes(&self,dir: String) -> Vec<String> {
+        let mut atributes = Vec::new();
+        for dir in &self.dirs {
+            atributes = dir.atributes.clone();
+        }
+
+        return atributes;
     }
 
     pub fn dir_add(&mut self, name: &str) {
@@ -56,8 +65,13 @@ impl Dir {
     pub fn element(&self){
         let mut res = "|_";
         let mut t = String::new();
-        for d in &self.dirs{
-            t = res.to_string()+"/"+d.get_name().as_str();
+        for dir in &self.dirs{
+            t = res.to_string()+"/"+dir.get_name().as_str();
+            println!("{}",t);
+        }
+
+        for file in &self.files {
+            t = res.to_string()+file.get_name().as_str();
             println!("{}",t);
         }
             
@@ -66,4 +80,5 @@ impl Dir {
     pub fn file_add(&mut self, name: String) {
         self.files.push(File::new(name));
     }
+
 }
