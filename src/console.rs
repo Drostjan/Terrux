@@ -28,8 +28,8 @@ impl Cmd {
         }
     }
 
-    pub fn init(&mut self, name: &str, path: &str){
-        self.root.name = name.to_owned();
+    pub fn init(&mut self,path: &str){
+        self.root.name = path.to_owned();
         self.root.dir_add("etc");
         self.root.dir_add("bin");
         self.root.dir_add("usr");
@@ -50,7 +50,6 @@ impl Cmd {
             let split: Vec<&str> = input.split(' ').collect();
             let comm = split[0].replace("\n", "");
             let mut param = String::new();
-            //print!("{}",comm.len());
             
             match comm.as_str() {
                 "exit"|"q" => self.keepalive = false,

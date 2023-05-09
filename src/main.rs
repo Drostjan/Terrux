@@ -8,6 +8,6 @@ use console::Cmd;
 
 pub fn main() {
     let mut terrux = Cmd::new();
-    terrux.init("/","/");
+    terrux.init("/");
     terrux.run();
 }
